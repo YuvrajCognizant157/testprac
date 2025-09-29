@@ -1,0 +1,29 @@
+<div>
+    <!--event binding->click event-->
+    <button (click)="onSelectUser()">
+    <!-- <button> -->
+
+        <!-- Without signals and Input decorator and separate props -->
+        <!-- <img [src]="imagePath" [alt]="name"/>
+        <span>{{name}}</span> -->
+
+        <!-- Without signals and Input decorator and single prop -->
+        <img [src]="imagePath" [alt]="user.name"/>
+        <span>{{user.name}}</span>
+
+        <!-- using Angular Signals and input function -->
+        <!-- <img [src]="imagePathSignalWithinput()" [alt]="nameSignal()"/>
+        <span>{{nameSignal()}}</span> -->
+
+        <!-- <img [src]=" 'assets/users/' + selectedUser.avatar" [alt]="selectedUser.name"/> 
+        <img [src]="imagePath" [alt]="selectedUser.name"/>  imagePath used as a property not a function
+        <img [src]="imagePathSignal()" [alt]="selectedUserSignal().name"/>  using signal to get imagePath
+
+
+
+        property binding, creating dynamic paths
+        <span>{{selectedUser.name}}</span>string interpolation
+        <p><span>[[{{selectedUserSignal().name}} -- using signal]]</span></p>string interpolation with signal value -->
+
+    </button>
+</div>
