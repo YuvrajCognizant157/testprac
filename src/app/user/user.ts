@@ -1,7 +1,23 @@
 import { Component ,computed,signal,Input,input, Output, EventEmitter, output} from '@angular/core';
 import { DUMMY_USERS } from '../dummy-users';
 
-const randomIndex = Math.floor(Math.random() * DUMMY_USERS.length);//to get a random index from 0 to length-1
+//! M2 : data formatting using Type Alias
+type UserType = {
+  id:string;
+  name:string;
+  avatar:string;
+};
+
+//! M3:Using Interface for Data formatting
+/* interface UserInterface {
+//   id:string;
+//   name:string;
+//   avatar:string;
+// }
+*/
+
+// const randomIndex = Math.floor(Math.random() * DUMMY_USERS.length);//to get a random index from 0 to length-1
+
 @Component({
   selector: 'app-user',
   imports: [],
@@ -18,12 +34,18 @@ export class User {
   // @Input({required:true}) name!: string ;
   // @Input({required:true}) id!: string ;
 
-  @Input({required:true}) user!: {
-    id:string;
-    name:string;
-    avatar:string;
-  };
+  /* --- */
+  // ! Method 1: to receive all data as an object from parent component using property binding
+  // @Input({required:true}) user!: {
+  //   id:string;
+  //   name:string;
+  //   avatar:string;
+  // };
+
+  /*Method 2: declare a type for user object*/
+  @Input({required:true}) user!: UserType;
   @Output() select = new EventEmitter<string>(); //to create a custom event to send data to parent component using event binding
+
   // @Output() select = new EventEmitter(); also works
    get imagePath(){
     // return 'assets/users/' + this.avatar;

@@ -1,1 +1,23 @@
-{{selectedUserName}}
+<section id="tasks">
+    <header>
+        <h2>{{selectedUserName}}'s Tasks</h2>
+        <menu>
+            <button>Add Task</button>
+        </menu>
+    </header>
+
+    <ul>
+        @for(tsk of tasks;track tsk.id){
+            <li>
+                <app-tsk />
+            </li>
+        }
+        
+        <li>
+            <app-tsk />
+        </li>
+        <li>
+            <app-tsk />
+        </li>
+    </ul>
+</section>

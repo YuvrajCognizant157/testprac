@@ -2,7 +2,8 @@
 
 <main>
   <ul id="users">
-    <!-- <li>
+    <!--Listing Without using property binding , type or interace keyword ,no dynamic rendering
+    <li> 
       <app-user [id]="users[0].id" [avatar]="users[0].avatar" [name]="users[0].name" (select)="onSelectUser($event)"/>
     </li>
     <li>
@@ -15,7 +16,8 @@
       <app-user [id]="users[3].id" [avatar]="users[3].avatar" [name]="users[3].name" (select)="onSelectUser($event)"/>
     </li> -->
 
-    <li>
+    <!-- Using property binding and type or interface keyword ,no dynamic rendering-->
+    <!-- <li>
       <app-user [user]="users[0]" (select)="onSelectUser($event)"/>
     </li>
     <li>
@@ -29,7 +31,36 @@
     </li>
     <li>
       <app-user [user]="users[4]" (select)="onSelectUser($event)"/>
+    </li> -->
+
+    <!-- Using Dynamic Rendering of List Data -->
+    <!--'track' used for Unique element in each user to keep track of unique user-->
+    
+    @for (user of users;track user.id){
+    <li>
+      <app-user [user]="user" (select)="onSelectUser($event)" />
     </li>
+    }
+    
+
+    <!-- Legacy method for 'for loop' and if condition -->
+    <!-- <li *ngFor="let user of users">
+      <app-user [user]="user" (select)="onSelectUser($event)" />
+    </li>
+    <app-task
+      *ngIf="selectedUserNameApp; else fallback"
+      selectedUserName="{{ selectedUserNameApp }}"
+    />
+    <ng-template #fallback>
+      <p id="fallback">Select a user to see their tasks!</p>
+    </ng-template>
+     -->
   </ul>
-  Tasks of the User : <app-task selectedUserName="{{selectedUserNameApp}}"></app-task>
+  <div>
+    @if(selectedUserNameApp){ Tasks of the User :
+    <app-task selectedUserName="{{ selectedUserNameApp }}" />
+    }@else {
+    <p id="fallback">Select a user to see their tasks!</p>
+    }
+  </div>
 </main>
