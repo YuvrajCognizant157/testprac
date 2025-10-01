@@ -16,11 +16,13 @@ import { NgFor,NgIf } from "@angular/common";
 export class App {
   protected readonly title = signal('EasyTask Application with Angular');
   selectedUserNameApp?:string  ;
+  selectedUserIdApp ?:string ;
 
   //pass all dummy users to app component
   users = DUMMY_USERS;
 
   onSelectUser(id:string){
     this.selectedUserNameApp = this.users.find(user => user.id === id)!?.name;
+    this.selectedUserIdApp = id;
   }
 }

@@ -52,6 +52,17 @@ ul {
   overflow: auto;
 }
 
+.active {
+  display: block;
+  background-color: #3a2c54;
+  padding: 1rem;
+  border-radius: 8px;
+  margin-top: 1rem;
+}
+.inactive {
+  display: none;
+}
+
 @media (min-width: 768px) {
   h2 {
     font-size: 1.25rem;

@@ -1,7 +1,6 @@
-<div>
+<app-card>
     <!--event binding->click event-->
-    <button (click)="onSelectUser()">
-    <!-- <button> -->
+    <button [class.active]="selected" (click)="onSelectUser()">
 
         <!-- Without signals and Input decorator and separate props -->
         <!-- <img [src]="imagePath" [alt]="name"/>
@@ -26,4 +25,4 @@
         <p><span>[[{{selectedUserSignal().name}} -- using signal]]</span></p>string interpolation with signal value -->
 
     </button>
-</div>
+</app-card>

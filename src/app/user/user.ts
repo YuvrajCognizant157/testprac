@@ -8,19 +8,16 @@ type UserType = {
   avatar:string;
 };
 
-//! M3:Using Interface for Data formatting
-/* interface UserInterface {
-//   id:string;
-//   name:string;
-//   avatar:string;
-// }
-*/
+//! M3:Using Interface for Data formatting imported from user.model.ts
+//? type keyword used for optionally making it clear that it is a type definition
+import {type UserInterface} from './user.model';
+import { Card } from "../shared/card/card"; 
 
 // const randomIndex = Math.floor(Math.random() * DUMMY_USERS.length);//to get a random index from 0 to length-1
 
 @Component({
   selector: 'app-user',
-  imports: [],
+  imports: [Card],
   templateUrl: './user.html',
   styleUrl: './user.css'
 })
@@ -44,6 +41,7 @@ export class User {
 
   /*Method 2: declare a type for user object*/
   @Input({required:true}) user!: UserType;
+  @Input({required:true})  selected !: boolean; 
   @Output() select = new EventEmitter<string>(); //to create a custom event to send data to parent component using event binding
 
   // @Output() select = new EventEmitter(); also works

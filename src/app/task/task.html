@@ -1,23 +1,32 @@
 <section id="tasks">
-    <header>
-        <h2>{{selectedUserName}}'s Tasks</h2>
-        <menu>
-            <button>Add Task</button>
-        </menu>
-    </header>
+  <header>
+    <h2>{{ selectedUserName }}'s Tasks</h2>
+    <menu>
+<button (click)="onAddNewTask()">Add Task</button>
+    </menu>
+  </header>
 
-    <ul>
-        @for(tsk of tasks;track tsk.id){
-            <li>
-                <app-tsk />
-            </li>
-        }
-        
-        <li>
+  <ul>
+    <!-- Dynamic Listing -->
+    @for(tsk of selectedUserTasks;track tsk.id){
+    <li>
+      <app-tsk [tsk]="tsk" (complete)="onCompleteTask($event)" />
+    </li>
+    }
+
+    <!-- Static Listing -->
+    <!-- <li>
             <app-tsk />
         </li>
         <li>
             <app-tsk />
-        </li>
-    </ul>
+        </li> -->
+  </ul>
 </section>
+
+<!-- openAddTask to open the new-task dialog , cancelAddTask method to trigger the function on tasks html to reset the openAddTask, so that we can open the add task again -->
+ <!-- openAddTask prop is taken as input by app-new-task component and
+  cancelAddTask is outputted by app-new-task to update the openAddTask in the task list -->
+@if(openAddTask){
+  <app-new-task  [openAddTaskStatus]="openAddTask" (cancelAddTask)="onCancelAddTask()" (addTaskEvent)="onCreateTask($event)"/>
+}
