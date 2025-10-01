@@ -1,5 +1,6 @@
-import { Component, EventEmitter, Input, Output, signal } from '@angular/core';
+import { Component, EventEmitter, inject, Input, Output, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { TasksService } from '../tasks.service';
 
 @Component({
   selector: 'app-new-task',
@@ -9,14 +10,21 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './new-task.css'
 })
 export class NewTask {
+
+  @Input({required:true}) userId!:string;
   @Input({required: true}) openAddTaskStatus: boolean =true;
-  @Output() cancelAddTask = new EventEmitter<void>();
-  @Output() addTaskEvent = new EventEmitter<{title:string;summary:string;date:string}>();//creating a output event emitter to send the new task data to the parent component
+  @Output() closeAddTaskDialog = new EventEmitter<void>();
+
+  // @Output() addTaskEvent = new EventEmitter<{title:string;summary:string;date:string}>();//creating a output event emitter to send the new task data to the parent component
 
   /* props w/o signals */
   enteredTitle: string = '';
   enteredSummary: string = '';
   enteredDate: string = '';
+
+
+  //another method of injecting the service using 'inject' function
+  private tasksService = inject(TasksService);
 
   /* props with signals */
   //no need to change anything on the html or template
@@ -30,14 +38,24 @@ export class NewTask {
     *'cancelAddTask' : other is output event emitter to notify the parent component to close the add task section
     */
     this.openAddTaskStatus = false ;
-    this.cancelAddTask.emit();
+    this.closeAddTaskDialog.emit();
   }
 
   onSubmit() {
-    this.addTaskEvent.emit({
+    //Using service to add the new task
+    this.tasksService.addTask({
       title: this.enteredTitle,
       summary: this.enteredSummary,
       date: this.enteredDate
-    })
+    },this.userId)
+    this.closeAddTaskDialog.emit();
+
+    /* W/O service*/
+    //emitting the event to the parent component with the new task data
+    // this.addTaskEvent.emit({
+    //   title: this.enteredTitle,
+    //   summary: this.enteredSummary,
+    //   date: this.enteredDate
+    // })
   }
 }

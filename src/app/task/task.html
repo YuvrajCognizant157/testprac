@@ -2,7 +2,7 @@
   <header>
     <h2>{{ selectedUserName }}'s Tasks</h2>
     <menu>
-<button (click)="onAddNewTask()">Add Task</button>
+<button (click)="onStartNewTask()">Add Task</button>
     </menu>
   </header>
 
@@ -10,7 +10,8 @@
     <!-- Dynamic Listing -->
     @for(tsk of selectedUserTasks;track tsk.id){
     <li>
-      <app-tsk [tsk]="tsk" (complete)="onCompleteTask($event)" />
+      <!-- <app-tsk [tsk]="tsk" (complete)="onCompleteTask()" /> -->
+      <app-tsk [tsk]="tsk"  />
     </li>
     }
 
@@ -28,5 +29,6 @@
  <!-- openAddTask prop is taken as input by app-new-task component and
   cancelAddTask is outputted by app-new-task to update the openAddTask in the task list -->
 @if(openAddTask){
-  <app-new-task  [openAddTaskStatus]="openAddTask" (cancelAddTask)="onCancelAddTask()" (addTaskEvent)="onCreateTask($event)"/>
+  <app-new-task [userId]="userId!" [openAddTaskStatus]="openAddTask" (closeAddTaskDialog)="onCancelAddTask()" />
+  <!-- (addTaskEvent)="onCreateTask()"/> -->
 }
